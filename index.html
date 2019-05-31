@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <title>MackMapas</title>
+</head>
+<style>
+    body {
+        width: 1036px;
+    }
+
+    .container {
+        outline: red;
+        outline-color: red;
+        outline-style: solid;
+    }
+
+    .map {
+        position: relative;
+        margin-top: 15px;
+        width: 1020px;
+    }
+    
+    .pin {
+        position: absolute;
+        margin: -5px -5px;
+        z-index: 1;
+    }
+    
+    .dropbtn {
+        background-color: red;
+        color: white;
+        padding: 16px;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+        width: 516px;
+    }
+    
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        width: 516px;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: #f9f9f9;
+        width: 516px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+    
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    
+    .dropdown-content a:hover {
+        background-color: #f1f1f1a9
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+        background-color: #800000;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="dropdown">
+            <button class="dropbtn">Origem</button>
+            <div class="dropdown-content">
+                <a href="#" onclick="plotOrigem(`map`, 0, {x: 482, y: 528});removeOrigem('map', 1);removeOrigem('map', 2)">Prédio 31</a>
+                <a href="#" onclick="plotOrigem(`map`, 1, {x: 258, y: 402});removeOrigem('map', 0);removeOrigem('map', 2)">Auditório Ruy Barbosa</a>
+                <a href="#" onclick="plotOrigem(`map`, 2, {x: 708, y: 688});removeOrigem('map', 0);removeOrigem('map', 1)">Catraca Consolação</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Destino</button>
+            <div class="dropdown-content">
+                <a href="#" onclick="plotDestino(`map`, 0, {x: 482, y: 528});removeDestino('map', 1);removeDestino('map', 2)">Prédio 31</a>
+                <a href="#" onclick="plotDestino(`map`, 1, {x: 258, y: 402});removeDestino('map', 0);removeDestino('map', 2)">Auditório Ruy Barbosa</a>
+                <a href="#" onclick="plotDestino(`map`, 2, {x: 708, y: 688});removeDestino('map', 1);removeDestino('map', 0)">Catraca Consolação</a>
+            </div>
+        </div>
+        <div id="map" class="map">
+            <img src="mapa2.jpeg">
+        </div>
+    </div>
+</body>
+
+<script>
+    function plotOrigem(idContainer, indiceItem, position) {
+        let container = document.getElementById(idContainer);
+        container.innerHTML = container.innerHTML + `<div class="pin" id="pinOrigem${indiceItem}" style="left: ${position.x}px; top: ${position.y}px;"><img src="pin.png"></div>`;
+    }
+
+    function plotDestino(idContainer, indiceItem, position) {
+        let container = document.getElementById(idContainer);
+        container.innerHTML = container.innerHTML + `<div class="pin" id="pinDestino${indiceItem}" style="left: ${position.x}px; top: ${position.y}px;"><img src="pinpreto.png"></div>`;
+    }
+
+    function removeOrigem(idContainer, indiceItem) {
+        let element = document.getElementById(`pinOrigem${indiceItem}`);
+        document.getElementById(idContainer).removeChild(element);
+    }
+
+    function removeDestino(idContainer, indiceItem) {
+        let element = document.getElementById(`pinDestino${indiceItem}`);
+        document.getElementById(idContainer).removeChild(element);
+    }
+</script>
+
+</html>
